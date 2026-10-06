@@ -1,0 +1,13 @@
+---
+- name: Configure a Linux host for the demo
+  hosts: linux_servers
+  become: false
+  tasks:
+    - name: Check Python version
+      ansible.builtin.command: python3 --version
+      register: python_version
+      changed_when: false
+
+    - name: Show host information
+      ansible.builtin.debug:
+        msg: "Configured {{ inventory_hostname }} with {{ python_version.stdout }}"
